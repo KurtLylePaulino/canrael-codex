@@ -20,6 +20,7 @@
   const copyLabel    = document.getElementById("copyLabel");
   const counterEl    = document.getElementById("counter");
   const totalCountEl = document.getElementById("totalCount");
+  const soundToggle  = document.getElementById("soundToggle");
 
   // ---- State ----
   let activeCat = "all";
@@ -32,6 +33,12 @@
     return c ? c.label : id;
   };
 
+  // ---- Ambient SFX (no-ops gracefully if sfx.js is absent) ----
+  const sfx = (name) => {
+    const s = window.CanraelSFX;
+    if (s && typeof s[name] === "function") s[name]();
+  };
+
   // ---- Build region filter chips ----
   CATEGORIES.forEach((cat) => {
     const btn = document.createElement("button");
@@ -40,7 +47,10 @@
     btn.setAttribute("aria-pressed", cat.id === activeCat ? "true" : "false");
     btn.dataset.cat = cat.id;
     btn.innerHTML = `<span class="chip-sigil" aria-hidden="true">${cat.sigil}</span>${cat.label}`;
-    btn.addEventListener("click", () => setCategory(cat.id));
+    btn.addEventListener("click", () => {
+      if (cat.id !== activeCat) sfx("swap"); else sfx("tick");
+      setCategory(cat.id);
+    });
     regionsEl.appendChild(btn);
   });
 
@@ -128,6 +138,7 @@
   // ---- Copy / inscribe ----
   async function inscribe() {
     if (!current) return;
+    sfx("copy");
     const passage = `“${current.text}”\n— ${current.author}\n\nThe Canrael Codex`;
     try {
       await navigator.clipboard.writeText(passage);
@@ -156,18 +167,35 @@
   }
 
   // ---- Events ----
-  drawBtn.addEventListener("click", draw);
+  const doDraw = () => { sfx("draw"); draw(); };
+  drawBtn.addEventListener("click", doDraw);
   copyBtn.addEventListener("click", inscribe);
 
   document.addEventListener("keydown", (e) => {
     if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
+    if (e.target === soundToggle && (e.code === "Space" || e.key === "Enter")) return;
     if (e.code === "Space" || e.key === "Enter") {
       // Don't hijack Enter on the focused buttons themselves
-      if (e.code === "Space") { e.preventDefault(); draw(); }
+      if (e.code === "Space") { e.preventDefault(); doDraw(); }
     } else if (e.key === "c" || e.key === "C") {
       inscribe();
     }
   });
+
+  // ---- Sound toggle ----
+  if (soundToggle) {
+    const syncSound = () => {
+      const on = window.CanraelSFX ? window.CanraelSFX.isEnabled() : false;
+      soundToggle.textContent = on ? "♪ sound on" : "♪ sound off";
+      soundToggle.setAttribute("aria-pressed", on ? "true" : "false");
+    };
+    syncSound();
+    soundToggle.addEventListener("click", () => {
+      if (!window.CanraelSFX) return;
+      window.CanraelSFX.setEnabled(!window.CanraelSFX.isEnabled());
+      syncSound();
+    });
+  }
 
   // ---- Ambient embers ----
   function spawnEmbers() {
