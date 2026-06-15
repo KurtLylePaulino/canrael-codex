@@ -75,7 +75,9 @@ body::before {
   z-index: 0;
   pointer-events: none;
   background: url("assets/hero.webp") center 22% / cover no-repeat;
+  transition: opacity 0.45s ease;
 }
+.hero-banner.swapping { opacity: 0; }
 .hero-banner::after {
   content: "";
   position: absolute;
@@ -304,6 +306,15 @@ body::before {
 }
 .btn-ghost:hover { color: #cfe5ef; border-color: var(--aether); box-shadow: 0 0 20px rgba(143,182,201,0.25); transform: translateY(-2px); }
 .btn-ghost.copied { color: var(--gold-bright); border-color: var(--gold); }
+.btn-copy-note {
+  font-family: var(--font-body);
+  font-size: 0.64em;
+  letter-spacing: 0.02em;
+  opacity: 0.65;
+  margin-left: 0.1rem;
+  font-weight: 400;
+}
+.btn-ghost.copied .btn-copy-note { display: none; }
 
 .hint {
   font-family: var(--font-body);

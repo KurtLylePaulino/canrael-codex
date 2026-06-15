@@ -8,6 +8,7 @@
   "use strict";
 
   // ---- Elements ----
+  const bannerEl     = document.querySelector(".hero-banner");
   const regionsEl    = document.getElementById("regions");
   const blurbEl      = document.getElementById("regionBlurb");
   const cardEl       = document.getElementById("quoteCard");
@@ -50,9 +51,36 @@
     });
     const cat = CATEGORIES.find((c) => c.id === id);
     blurbEl.textContent = cat ? cat.blurb : "";
+    setBackground(cat);
     lastIndex = -1;
     updateCounter();
     draw();
+  }
+
+  // ---- Swap the banner backdrop for the selected region (crossfade) ----
+  let bannerImg = null;
+  function setBackground(cat) {
+    if (!bannerEl || !cat || !cat.image) return;
+    const next = "assets/" + cat.image;
+    if (next === bannerImg) return;
+    bannerImg = next;
+
+    const apply = () => {
+      bannerEl.style.backgroundImage = `url("${next}")`;
+      bannerEl.classList.remove("swapping");
+    };
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      apply();
+      return;
+    }
+    // Preload to avoid a flash of empty banner, then crossfade.
+    const pre = new Image();
+    pre.onload = pre.onerror = () => {
+      bannerEl.classList.add("swapping");
+      window.setTimeout(apply, 320);
+    };
+    pre.src = next;
   }
 
   // ---- Pool for the active category ----
@@ -168,6 +196,7 @@
   // ---- Init ----
   totalCountEl.textContent = QUOTES.length;
   blurbEl.textContent = CATEGORIES[0].blurb;
+  bannerImg = "assets/" + CATEGORIES[0].image; // matches the CSS default; avoids an opening flash
   spawnEmbers();
   updateCounter();
   draw();
