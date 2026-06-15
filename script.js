@@ -20,7 +20,9 @@
   const copyLabel    = document.getElementById("copyLabel");
   const counterEl    = document.getElementById("counter");
   const totalCountEl = document.getElementById("totalCount");
-  const soundToggle  = document.getElementById("soundToggle");
+  const musicToggle  = document.getElementById("musicToggle");
+  const sfxToggle    = document.getElementById("sfxToggle");
+  const musicVol     = document.getElementById("musicVol");
 
   // ---- State ----
   let activeCat = "all";
@@ -62,6 +64,7 @@
     const cat = CATEGORIES.find((c) => c.id === id);
     blurbEl.textContent = cat ? cat.blurb : "";
     setBackground(cat);
+    if (window.CanraelMusic) window.CanraelMusic.setCategory(id);
     lastIndex = -1;
     updateCounter();
     draw();
@@ -172,30 +175,50 @@
   copyBtn.addEventListener("click", inscribe);
 
   document.addEventListener("keydown", (e) => {
-    if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
-    if (e.target === soundToggle && (e.code === "Space" || e.key === "Enter")) return;
-    if (e.code === "Space" || e.key === "Enter") {
-      // Don't hijack Enter on the focused buttons themselves
-      if (e.code === "Space") { e.preventDefault(); doDraw(); }
-    } else if (e.key === "c" || e.key === "C") {
-      inscribe();
-    }
+    const tag = e.target.tagName;
+    if (tag === "INPUT" || tag === "TEXTAREA") return;
+    // Let a focused button handle Space/Enter natively (don't also draw).
+    if (tag === "BUTTON" && (e.code === "Space" || e.key === "Enter")) return;
+    if (e.code === "Space") { e.preventDefault(); doDraw(); }
+    else if (e.key === "c" || e.key === "C") { inscribe(); }
   });
 
-  // ---- Sound toggle ----
-  if (soundToggle) {
-    const syncSound = () => {
-      const on = window.CanraelSFX ? window.CanraelSFX.isEnabled() : false;
-      soundToggle.textContent = on ? "♪ sound on" : "♪ sound off";
-      soundToggle.setAttribute("aria-pressed", on ? "true" : "false");
-    };
-    syncSound();
-    soundToggle.addEventListener("click", () => {
+  // ---- Audio controls (Music / Sfx / volume) ----
+  function syncAudioUI() {
+    if (sfxToggle && window.CanraelSFX) {
+      const on = window.CanraelSFX.isEnabled();
+      sfxToggle.setAttribute("aria-pressed", on ? "true" : "false");
+    }
+    if (musicToggle && window.CanraelMusic) {
+      const on = window.CanraelMusic.isEnabled();
+      musicToggle.setAttribute("aria-pressed", on ? "true" : "false");
+    }
+    if (musicVol && window.CanraelMusic) {
+      musicVol.value = Math.round(window.CanraelMusic.getVolume() * 100);
+    }
+  }
+
+  if (sfxToggle) {
+    sfxToggle.addEventListener("click", () => {
       if (!window.CanraelSFX) return;
       window.CanraelSFX.setEnabled(!window.CanraelSFX.isEnabled());
-      syncSound();
+      syncAudioUI();
     });
   }
+  if (musicToggle) {
+    musicToggle.addEventListener("click", () => {
+      if (!window.CanraelMusic) return;
+      window.CanraelMusic.setCategory(activeCat);
+      window.CanraelMusic.setEnabled(!window.CanraelMusic.isEnabled());
+      syncAudioUI();
+    });
+  }
+  if (musicVol) {
+    musicVol.addEventListener("input", () => {
+      if (window.CanraelMusic) window.CanraelMusic.setVolume(musicVol.value / 100);
+    });
+  }
+  syncAudioUI();
 
   // ---- Ambient embers ----
   function spawnEmbers() {
