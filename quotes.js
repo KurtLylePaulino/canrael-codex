@@ -1,0 +1,168 @@
+/* =====================================================================
+   THE CANRAEL CODEX — Quote Bank
+   "In a world where the gods have turned their gaze away,
+    we are but whispers in the ruins of a forgotten age."
+
+   Voices are anonymous — archetypes of the peoples and places of
+   Canrael, never named individuals. Categories follow the world's
+   geography: its continents, its regions, and the deep below.
+   ===================================================================== */
+
+const CATEGORIES = [
+  { id: "all",         label: "All Voices",            sigil: "✦", blurb: "Every whisper in the ruins of Canrael." },
+  { id: "world",       label: "The World Adrift",      sigil: "✦", blurb: "Proverbs from a world where the gods have gone silent and decay eats at all things." },
+  { id: "alverdon",    label: "Alverdon · The East",   sigil: "☼", blurb: "Desert tribes, fading knights, the Great Rift, the Empire of steel, and the Holy City." },
+  { id: "eldovia",     label: "Eldovia · The West",    sigil: "⧖", blurb: "The knights of Bruma, the time-elves of the Weave, the dwarven forges, and the vampiric south." },
+  { id: "frosthold",   label: "Frosthold · The North", sigil: "❅", blurb: "Eternal winter, the Gray Wardens, and the rising tide of the Lich King." },
+  { id: "ankari",      label: "Ankari · Land of Reeds", sigil: "⛩", blurb: "Yokai, samurai, and the spirits warring beneath the Golden Sun Throne." },
+  { id: "miran",       label: "Miran · Martial Realm", sigil: "☯", blurb: "A land of cultivation where strength is the only authority." },
+  { id: "abyss",       label: "The Abyss Below",       sigil: "✸", blurb: "The hunger beneath the world, the failing lighthouses, and those who fight the dark." },
+  { id: "convergence", label: "Echoes of the Golden Age", sigil: "✶", blurb: "The Convergence that shattered the world, and the lost wonders of a mythic past." }
+];
+
+const QUOTES = [
+  /* ----------------------- The World Adrift ----------------------- */
+  { text: "In a world where the gods have turned their gaze away, we are but whispers in the ruins of a forgotten age.", author: "A wandering pilgrim of the broken lands", cat: "world" },
+  { text: "The skies are silent, the old pantheons forgotten, and even the air feels heavy with unanswered prayers.", author: "A chronicler of the fading age", cat: "world" },
+  { text: "Survival is uncertain, and every journey is a test of will against the encroaching void.", author: "A road-weary sellsword", cat: "world" },
+  { text: "Kindle a small light in the endless dark. It is not much. It is everything.", author: "An old proverb of the ruined world", cat: "world" },
+  { text: "Mistrust hope, the elders say; clutch tightly to faith, strength, or coin. Yet the ones who endure clutch tightest to each other.", author: "A grandmother of the outlands", cat: "world" },
+  { text: "Every ruin holds the secret of a lost age — and few of those secrets were ever meant to be kept.", author: "A grave-robber turned scholar", cat: "world" },
+  { text: "Paladins question their faith, knights become mercenaries, and mages delve into forbidden arts. All of us only seek purpose where the gods no longer answer.", author: "A disillusioned cleric", cat: "world" },
+  { text: "Decay eats away at every civilization, and survival here often comes at the cost of morality.", author: "An archivist of the dying cities", cat: "world" },
+  { text: "We remember our heroes only in myth now, and every step forward is a defiance against the despair that would swallow us.", author: "A keeper of old songs", cat: "world" },
+  { text: "This world once knew greatness. Now it struggles against time and entropy, and calls the struggle living.", author: "A historian of forgotten glory", cat: "world" },
+  { text: "Hope is a stubborn thing. It survives in outcasts, in scholars, in warriors — anyone foolish enough to still kindle a light.", author: "A wandering storyteller", cat: "world" },
+  { text: "The golden age is a distant dream, and the future is written in both hope and despair.", author: "A seer of the broken lands", cat: "world" },
+  { text: "Faith, strength, or coin — choose what you will cling to. The void does not care which.", author: "A beggar-philosopher of the crossroads", cat: "world" },
+  { text: "Each step forward is a small defiance against the creeping dark.", author: "A nameless traveler of the wastes", cat: "world" },
+
+  /* ----------------------- Alverdon · The East ----------------------- */
+  { text: "We are masters of the harshest sand, where culture and tradition grow only around the rarest water.", author: "A desert warrior of the Great Outlands", cat: "alverdon" },
+  { text: "The Warrior King's banner gathers orc and goliath and man alike. In the desert, the only tribe that matters is the one that survives the night.", author: "A nomad of the Great Outlands", cat: "alverdon" },
+  { text: "Altmira's chivalry is a polished shell, and beneath it the rot spreads. I have worn that armor; I know its weight and its lie.", author: "A disillusioned knight of the Border Kingdoms", cat: "alverdon" },
+  { text: "Once we rode gryphons against the orc-tide as one. Now the city-states bicker while the coalition frays.", author: "An old gryphon-rider of Altmira", cat: "alverdon" },
+  { text: "Do not go into the Rift. The land is gray, the storms are violent, and the things that dwell there were never meant to.", author: "A bastion-guard of the Great Rift", cat: "alverdon" },
+  { text: "We hold the wall against the horrors so the rest of Alverdon may pretend they do not exist.", author: "A sentinel of the Rift bastions", cat: "alverdon" },
+  { text: "The Empire calls itself the Shield of Humanity. It is also the blade that bleeds its own land dry.", author: "An archivist of the smoke-choked cities", cat: "alverdon" },
+  { text: "Some of us gave our flesh to the machine and called it duty. The machine does not give it back.", author: "A steam-soldier of the Empire", cat: "alverdon" },
+  { text: "We save the elf and the orc from the dark, then tell ourselves we are better than them. That is the oldest lie of the Empire.", author: "A repentant officer of the Empire", cat: "alverdon" },
+  { text: "The high elves are immortal and aloof; the wood elves fierce and watchful. Both would rather you never found their cities at all.", author: "A ranger of the Selndrian Forest", cat: "alverdon" },
+  { text: "The Seven are silent, yet still we ring the bells — lest the silence become the only prayer we know.", author: "A cleric of the Holy City", cat: "alverdon" },
+  { text: "Kindness is the Theocracy's newest mask. It wears the mask well; I have seen what lies beneath.", author: "An orphan of the Holy City", cat: "alverdon" },
+  { text: "Faith here is a shield in one hand and a chain in the other. Pray you are never taught which is which.", author: "A lapsed paladin of the Seven", cat: "alverdon" },
+  { text: "I kept the orphanage lamps lit long after I stopped believing anyone was listening.", author: "A caretaker of the Holy City", cat: "alverdon" },
+
+  /* ----------------------- Eldovia · The West ----------------------- */
+  { text: "Bruma is the last bastion of the north, and we hold it from the saddle. Let the vampires and the trollkin test our lances.", author: "A heavy knight of Bruma", cat: "eldovia" },
+  { text: "Coldharbor bows to no one and trades with everyone. Independence is the only loyalty a port can afford.", author: "A merchant of Coldharbor", cat: "eldovia" },
+  { text: "Time is a weave, and we are only threads. Fortunate the thread that learns to choose its own pattern.", author: "An elven warrior of the Whispering Wood", cat: "eldovia" },
+  { text: "We worship the Great Weave, the river of all moments. Outsiders call us Time Elves and understand nothing.", author: "A chronomancer of Valefor", cat: "eldovia" },
+  { text: "The World Tree remembers every age. We elves merely pretend that we do too.", author: "An elder of the Eternal Forest", cat: "eldovia" },
+  { text: "Beneath the Mythril Mountains we raised five keeps and ten towers, and still the mountain is stronger than us all.", author: "A runesmith of Clan Mundir", cat: "eldovia" },
+  { text: "The Starlight Forge melts star-metal only when the heavens align. Such a gift is guarded with a jealousy you cannot imagine.", author: "A Starlight Smith of the dwarves", cat: "eldovia" },
+  { text: "In the southern marshes the night is eternal, and the counts who rule it have long forgotten the taste of mercy.", author: "A survivor of the vampiric south", cat: "eldovia" },
+  { text: "Immortality is not a gift. It is the longest sentence, served alone.", author: "A vampire-count of the marshes", cat: "eldovia" },
+  { text: "Hunt me if you must, hunter. We are both only trying to outlive our grief.", author: "A creature of the eternal night", cat: "eldovia" },
+  { text: "The trollkin enslave, the vampires expand, and humanity learns to whisper in its own land.", author: "A refugee of the southern jungles", cat: "eldovia" },
+  { text: "Drifters, they call us — souls knocked loose from another world, hunted by the Wardens of time for the crime of being lost.", author: "One displaced by the Weave", cat: "eldovia" },
+  { text: "On the Night of Fading the great ones vanished in bursts of light and shadow. The Wardens, they whisper, collect their debts in silence.", author: "A keeper of Eldovian legends", cat: "eldovia" },
+  { text: "A long life teaches one cruelty above all: grief, unlike everything else, does not fade with the years.", author: "An elven warrior of noble blood", cat: "eldovia" },
+
+  /* ----------------------- Frosthold · The North ----------------------- */
+  { text: "Even in a world of frost, fire and blood can still rage.", author: "A saying of the frozen Tzardom", cat: "frosthold" },
+  { text: "The Lich King raises the dead faster than we can bury our own. Still we dig. Still we hold.", author: "A gray warden of Norvdal", cat: "frosthold" },
+  { text: "Cold does not kill you. Despair does. The cold merely carries the message.", author: "A warden of the frozen wall", cat: "frosthold" },
+  { text: "Our honor erodes a little more with every winter. Pray we fall before there is none left to lose.", author: "A gray warden of the north", cat: "frosthold" },
+  { text: "The Orthodoxy calls it divine will. The frostbitten dead in the square call it nothing at all.", author: "A dissenter of Norvdal", cat: "frosthold" },
+  { text: "Dwarf and orc share one fire in the north. In Frosthold, even the oldest hatreds freeze.", author: "A smith of the mountain citadels", cat: "frosthold" },
+  { text: "We raised the Gates of Mundus in reverence to the god who shaped the world. He has not spoken since.", author: "A dwarf of the northern halls", cat: "frosthold" },
+  { text: "The frost elves come down from the mountains only when the world is ending. Sleep well, knowing they have not yet come.", author: "A trader of Frostport", cat: "frosthold" },
+  { text: "Face me in the Martial Trial, or do not waste my winter.", author: "A frost elf of the high peaks", cat: "frosthold" },
+  { text: "Every victory here is hard-fought and fleeting. We have learned to love the fleeting kind.", author: "A survivor of the long winter", cat: "frosthold" },
+  { text: "Hold the wall. The Tzar is far, the gods are farther, and the dead are very close.", author: "A watch-cry of the gray wardens", cat: "frosthold" },
+  { text: "Frostport is a rare warm hearth in a cold land — and pirates, bandits, and dark magic all gather where the fire is.", author: "A dockmaster of Frostport", cat: "frosthold" },
+  { text: "Towering glaciers, windswept tundra, silent forests: a land as beautiful as it is willing to kill you.", author: "A scout of the frozen wastes", cat: "frosthold" },
+  { text: "We orcs hunt the monsters, the dwarves raise the walls, and together we earn one more season of breath.", author: "An orc of the northern alliance", cat: "frosthold" },
+
+  /* ----------------------- Ankari · Land of Reeds ----------------------- */
+  { text: "The gods are silent, but the spirits are not. In Ankari, it is the dead who answer first.", author: "A shrine-maiden of the reed-lands", cat: "ankari" },
+  { text: "Three lords reach for the Golden Sun Throne. The throne reaches back, and it is hungry.", author: "A wandering monk of Ankari", cat: "ankari" },
+  { text: "Once a spirit of peace, now a figure of change. The two are not so different as you fear.", author: "A follower of the Pale Oni", cat: "ankari" },
+  { text: "I do not rule through wisdom or mercy. I rule because my hand has never once trembled.", author: "A soldier of the Red banner", cat: "ankari" },
+  { text: "A master of every weapon needs no name. Skill speaks louder than any banner.", author: "A swordsman of the central plains", cat: "ankari" },
+  { text: "The Yokai kept their oaths for a thousand years. They will not keep them through a thousand more of our war.", author: "A keeper of the old shrines", cat: "ankari" },
+  { text: "The Ghosts of War rise from the bloodied earth, and they remember every hand that spilled them.", author: "A battlefield mourner of Ankari", cat: "ankari" },
+  { text: "Honor and duty are the walls of our citadel. They are also its prison.", author: "A samurai of the disciplined city", cat: "ankari" },
+  { text: "The land rots with the decay of time and blood, yet still the reeds grow, green and indifferent.", author: "A farmer of the war-torn fields", cat: "ankari" },
+  { text: "Peace is a teaching, not a gift. Few in Ankari have the patience to learn it.", author: "A hermit of the northern hills", cat: "ankari" },
+  { text: "Since the Imperial Sun vanished, the land has known only civil war and restless spirits.", author: "A historian of the Golden Throne", cat: "ankari" },
+  { text: "Yokai in the mountains, ghosts on the battlefields, oni upon the thrones. The living are the smallest power in Ankari.", author: "A ronin of the reed-lands", cat: "ankari" },
+  { text: "The oni's claim to the throne is as strong as any mortal king's — and far older.", author: "A spirit-speaker of the sacred forests", cat: "ankari" },
+  { text: "We fight, we die, and the spirits of the fallen grow stronger on the war we feed them.", author: "A foot-soldier of the warring provinces", cat: "ankari" },
+
+  /* ----------------------- Miran · Martial Realm ----------------------- */
+  { text: "Strength is the ultimate form of authority. All else is decoration.", author: "A cultivator of the orthodox sects", cat: "miran" },
+  { text: "Magic is distrusted, science rejected, the gods forgotten. Only the body, the spirit, and the will remain.", author: "A wandering martial artist of Miran", cat: "miran" },
+  { text: "A fist that can break a mountain is still nothing before a will that will not break.", author: "A disciple of the sundering fists", cat: "miran" },
+  { text: "Move like water and no one can hold you; become a wall and none can pass.", author: "A master of the flowing waters", cat: "miran" },
+  { text: "The Nine Skies are not a height to reach, but a depth to cultivate.", author: "An elder of the orthodox sects", cat: "miran" },
+  { text: "In the Seven Ruins we kept what the empire threw away: the freedom to choose our own ruin.", author: "An outcast of the unorthodox sects", cat: "miran" },
+  { text: "Only the strongest survive, and the strong are never finished becoming so.", author: "An old proverb of the Murim", cat: "miran" },
+  { text: "The Demonic Cult promises power without price. There is no such thing — only debts that come due in blood.", author: "A swordsman of the sainted sects", cat: "miran" },
+  { text: "I have spent a thousand days perfecting a single strike. Tomorrow I begin the second.", author: "An ascetic of the mountain monasteries", cat: "miran" },
+  { text: "Bow to no fate. The heavens did not give you your strength — you tore it from them.", author: "A teaching of the martial path", cat: "miran" },
+  { text: "In the trade-cities even sworn enemies barter in peace; gold is the one art every sect respects.", author: "A merchant of the central plains", cat: "miran" },
+  { text: "The Heavenly Demon's shadow stretches over us all. Cultivate quickly, for the night is coming.", author: "A watcher of the demonic cult", cat: "miran" },
+  { text: "A sect is a family forged in suffering. Betray it, and a thousand brothers become a thousand blades.", author: "A disciple of the divine mandate", cat: "miran" },
+  { text: "The land itself hums with martial energy. Listen closely, and the mountains will teach you to break them.", author: "A hermit of the high cliffs", cat: "miran" },
+
+  /* ----------------------- The Abyss Below ----------------------- */
+  { text: "It had always been there, waiting. The Abyss did not come into being — it simply woke.", author: "A scholar driven half-mad by the deep", cat: "abyss" },
+  { text: "The Abyss does not simply kill. It takes. It takes memory, it takes purpose, and in return it gives only silence.", author: "A survivor of the descent", cat: "abyss" },
+  { text: "It does not think, but it remembers. It does not plan, but it waits.", author: "A chronicler of the dark below", cat: "abyss" },
+  { text: "To stand at the edge and look down is to feel the pull — not the gravity of the chasm, but the call of something deeper.", author: "A keeper of an abyssal gate", cat: "abyss" },
+  { text: "The Abyss does not claim its victims by force. It whispers to them; it calls to the desperate and the lost.", author: "A priest who guards the descent", cat: "abyss" },
+  { text: "Those who return are never the same. They speak in whispers and dream of things with too many eyes.", author: "A healer of the broken-minded", cat: "abyss" },
+  { text: "As long as a single lighthouse still burns, there is hope.", author: "A keeper of the failing lights", cat: "abyss" },
+  { text: "The souls within do not sleep. They burn — so that the dark may not.", author: "A keeper of the lighthouse flame", cat: "abyss" },
+  { text: "Each lighthouse is a lonely vigil, a solitary war against the inevitable. And still we keep the flame.", author: "A warden of the dimming beacons", cat: "abyss" },
+  { text: "I was born a lightbringer in an endless dark. I will die and rise and die again — until my final death buys the world one more dawn.", author: "The last of her people", cat: "abyss" },
+  { text: "We are the ones made monsters to slay monsters. We will not give the dark an inch of ground without shedding blood.", author: "A hunter of the night", cat: "abyss" },
+  { text: "To fight the dark, you must carry a little of it. The trick is never letting it carry you.", author: "A teaching of the night-hunters", cat: "abyss" },
+  { text: "They adore us in daylight and bar their doors against us at night. We have made our peace with both.", author: "A shunned hunter of the deep places", cat: "abyss" },
+  { text: "We do not kneel. We do not pray. We rise. The light abandoned us, so we found our strength in the dark.", author: "A heretic of the abyssal faith", cat: "abyss" },
+  { text: "For every ruler of the dark that falls, another rises. The Abyss has no limit, and names hold power within it.", author: "A frightened cartographer of the underworld", cat: "abyss" },
+
+  /* ----------------------- Echoes of the Golden Age ----------------------- */
+  { text: "The Convergence shattered realms and brought forth beings that should not exist. We live in the rubble of that single hour.", author: "A chronicler of the catastrophe", cat: "convergence" },
+  { text: "Long ago, heroes defied fate and stood against beings beyond mortal understanding. We inherited only the ruins of their courage.", author: "A historian of the golden age", cat: "convergence" },
+  { text: "Ascalon reached past the limits of the soul and vanished into myth. Its lighthouses still burn — proof that ambition outlives the ambitious.", author: "An archivist of the lost kingdom", cat: "convergence" },
+  { text: "They forged wonders from the very essence of the soul. Some say that hunger for truth is precisely what destroyed them.", author: "A scholar of forgotten Ascalon", cat: "convergence" },
+  { text: "The relics of a dead kingdom are still hunted by those who would wield its forbidden power.", author: "A relic-hunter of the old world", cat: "convergence" },
+  { text: "Fate is not written by the gods, but by hands far colder — and those hands can, perhaps, be stayed.", author: "A seeker of lost truths", cat: "convergence" },
+  { text: "I have seen too much, lost too much, and endured what no mortal should. Do not envy the long-lived.", author: "A wanderer who remembers the old age", cat: "convergence" },
+  { text: "The mythic past lingers like a distant dream, buried under layers of myth and broken magic.", author: "A keeper of ruined libraries", cat: "convergence" },
+  { text: "Every scar on this land is the signature of an ancient war. Read them, and you read our doom.", author: "A cartographer of the old battlefields", cat: "convergence" },
+  { text: "Once there was divine presence and magical splendor. Now there is only the hollow where it used to be.", author: "A mourner of the silent heavens", cat: "convergence" },
+  { text: "The forge of a lost age still hums in the dark, untended, waiting for hands worthy of it.", author: "A pilgrim to the ruins of the old kingdom", cat: "convergence" },
+  { text: "We were not abandoned all at once. The gods turned away slowly, the way a fire dies — and we only noticed the cold.", author: "A theologian of the fading faith", cat: "convergence" },
+  { text: "Heroes once stood against the things beyond the veil. The veil tore anyway, and they with it.", author: "A bard of the Convergence", cat: "convergence" },
+  { text: "What the golden age built, the Convergence broke. What the Convergence broke, we are still learning to fear.", author: "A chronicler of the broken world", cat: "convergence" },
+
+  /* ----------------------- Additional whispers ----------------------- */
+  { text: "Smoke is the Empire's incense, and the factory-whistle its only hymn.", author: "A laborer of the imperial forges", cat: "alverdon" },
+  { text: "The Outlands forgive nothing and forget no one. The desert keeps every bone it is given.", author: "A nomad elder of the Great Outlands", cat: "alverdon" },
+  { text: "We dwarves carve our prayers into stone, for stone at least remembers. The gods do not.", author: "A stonewright of Clan Mundir", cat: "eldovia" },
+  { text: "In the eternal forest, a single careless step can cost you a hundred years.", author: "A pathfinder of the Whispering Wood", cat: "eldovia" },
+  { text: "The Tzar rules the living; the Orthodoxy rules their fear; the Lich King rules everything that comes after.", author: "A grim proverb of the north", cat: "frosthold" },
+  { text: "We do not fear the long night. We fear the morning that finds our walls already breached.", author: "A sentinel of the frozen gate", cat: "frosthold" },
+  { text: "A hundred sects, a thousand masters, ten thousand techniques — and still death remains undefeated.", author: "An old wanderer of the martial world", cat: "miran" },
+  { text: "The gods did not die. They simply stopped listening, which for the praying is the same thing.", author: "A street preacher of the ruined cities", cat: "world" },
+  { text: "We are the children of a broken promise, and we have learned to keep our own.", author: "A matron of the refugee roads", cat: "world" },
+  { text: "Light a candle for the dead if you must, but save the lantern for the road ahead.", author: "A caravan-master of the wastes", cat: "world" }
+];
+
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = { CATEGORIES, QUOTES };
+}
