@@ -64,6 +64,31 @@ body::before {
   background: radial-gradient(110% 90% at 50% 40%, transparent 55%, rgba(0,0,0,0.55) 100%);
 }
 
+/* Per-region colour wash — bends the dark "void" toward the region's mood.
+   A deep, desaturated glow pooled in the lower area, masked so it never
+   touches the banner up top. Crossfades when the region changes. */
+.region-wash {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-color: var(--region-tint, rgba(42,36,24,0.5));
+  -webkit-mask-image: radial-gradient(100% 72% at 50% 84%, #000 0%, rgba(0,0,0,0.55) 46%, transparent 80%);
+          mask-image: radial-gradient(100% 72% at 50% 84%, #000 0%, rgba(0,0,0,0.55) 46%, transparent 80%);
+  transition: background-color 0.65s ease;
+}
+
+body[data-region="all"],
+body[data-region="world"]       { --region-tint: rgba(44,37,24,0.50); }   /* warm ash */
+body[data-region="alverdon"]    { --region-tint: rgba(80,50,20,0.48); }   /* desert bronze */
+body[data-region="empire"]      { --region-tint: rgba(84,40,18,0.46); }   /* rust & soot */
+body[data-region="eldovia"]     { --region-tint: rgba(20,58,46,0.46); }   /* deep forest teal */
+body[data-region="frosthold"]   { --region-tint: rgba(30,54,80,0.46); }   /* glacial blue */
+body[data-region="ankari"]      { --region-tint: rgba(82,26,40,0.46); }   /* crimson night */
+body[data-region="miran"]       { --region-tint: rgba(26,62,42,0.46); }   /* jade green */
+body[data-region="abyss"]       { --region-tint: rgba(30,40,68,0.52); }   /* cold abyssal blue */
+body[data-region="convergence"] { --region-tint: rgba(72,54,24,0.46); }   /* antique gold */
+
 /* The lighthouse banner behind the masthead — fades into the page */
 .hero-banner {
   position: absolute;

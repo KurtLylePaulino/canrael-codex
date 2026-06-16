@@ -63,6 +63,7 @@
     });
     const cat = CATEGORIES.find((c) => c.id === id);
     blurbEl.textContent = cat ? cat.blurb : "";
+    document.body.dataset.region = id;
     setBackground(cat);
     if (window.CanraelMusic) window.CanraelMusic.setCategory(id);
     lastIndex = -1;
@@ -247,6 +248,7 @@
   // ---- Init ----
   totalCountEl.textContent = QUOTES.length;
   blurbEl.textContent = CATEGORIES[0].blurb;
+  document.body.dataset.region = CATEGORIES[0].id;
   bannerImg = "assets/" + CATEGORIES[0].image; // matches the CSS default; avoids an opening flash
   spawnEmbers();
   updateCounter();
