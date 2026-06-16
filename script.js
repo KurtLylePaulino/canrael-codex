@@ -23,6 +23,14 @@
   const musicToggle  = document.getElementById("musicToggle");
   const sfxToggle    = document.getElementById("sfxToggle");
   const musicVol     = document.getElementById("musicVol");
+  const gazeBtn      = document.getElementById("gazeBtn");
+  const lightbox     = document.getElementById("lightbox");
+  const lbImg        = document.getElementById("lbImg");
+  const lbPrev       = document.getElementById("lbPrev");
+  const lbNext       = document.getElementById("lbNext");
+  const lbClose      = document.getElementById("lbClose");
+  const lbTitle      = document.getElementById("lbTitle");
+  const lbCount      = document.getElementById("lbCount");
 
   // ---- State ----
   let activeCat = "all";
@@ -176,6 +184,13 @@
   copyBtn.addEventListener("click", inscribe);
 
   document.addEventListener("keydown", (e) => {
+    // When the scene viewer is open, it owns the keyboard.
+    if (lightbox && lightbox.classList.contains("open")) {
+      if (e.key === "Escape") closeGallery();
+      else if (e.key === "ArrowRight") nextScene();
+      else if (e.key === "ArrowLeft") prevScene();
+      return;
+    }
     const tag = e.target.tagName;
     if (tag === "INPUT" || tag === "TEXTAREA") return;
     // Let a focused button handle Space/Enter natively (don't also draw).
@@ -183,6 +198,56 @@
     if (e.code === "Space") { e.preventDefault(); doDraw(); }
     else if (e.key === "c" || e.key === "C") { inscribe(); }
   });
+
+  // ---- Realm scene viewer (lightbox) ----
+  function galleryFor(cat) {
+    if (cat === "all") {
+      const arr = ["assets/hero.webp"];
+      CATEGORIES.forEach((c) => { if (c.id !== "all") arr.push("assets/bg-" + c.id + ".webp"); });
+      return arr;
+    }
+    const arr = ["assets/bg-" + cat + ".webp"];
+    for (let i = 1; i <= 4; i++) arr.push("assets/scenes/" + cat + "-" + i + ".webp");
+    return arr;
+  }
+
+  let lbList = [];
+  let lbIndex = 0;
+
+  function showScene(i, instant) {
+    if (!lbList.length) return;
+    lbIndex = (i + lbList.length) % lbList.length;
+    lbCount.textContent = (lbIndex + 1) + " / " + lbList.length;
+    const src = lbList[lbIndex];
+    if (instant) { lbImg.src = src; lbImg.classList.remove("swapping"); return; }
+    lbImg.classList.add("swapping");
+    const pre = new Image();
+    pre.onload = pre.onerror = () => { lbImg.src = src; lbImg.classList.remove("swapping"); };
+    pre.src = src;
+  }
+  function nextScene() { sfx("tick"); showScene(lbIndex + 1); }
+  function prevScene() { sfx("tick"); showScene(lbIndex - 1); }
+
+  function openGallery(cat) {
+    lbList = galleryFor(cat);
+    lbTitle.textContent = labelOf(cat).replace(/ · /g, " — ");
+    showScene(0, true);
+    lightbox.classList.add("open");
+    lightbox.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+    sfx("swap");
+  }
+  function closeGallery() {
+    lightbox.classList.remove("open");
+    lightbox.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+  }
+
+  if (gazeBtn) gazeBtn.addEventListener("click", () => openGallery(activeCat));
+  if (lbClose) lbClose.addEventListener("click", closeGallery);
+  if (lbNext) lbNext.addEventListener("click", nextScene);
+  if (lbPrev) lbPrev.addEventListener("click", prevScene);
+  if (lightbox) lightbox.addEventListener("click", (e) => { if (e.target === lightbox) closeGallery(); });
 
   // ---- Audio controls (Music / Sfx / volume) ----
   function syncAudioUI() {
