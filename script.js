@@ -31,6 +31,16 @@
   const lbClose      = document.getElementById("lbClose");
   const lbTitle      = document.getElementById("lbTitle");
   const lbCount      = document.getElementById("lbCount");
+  const seekBtn      = document.getElementById("seekBtn");
+  const seek         = document.getElementById("seek");
+  const seekClose    = document.getElementById("seekClose");
+  const seekWarn     = document.getElementById("seekWarn");
+  const seekSearch   = document.getElementById("seekSearch");
+  const seekProceed  = document.getElementById("seekProceed");
+  const seekCancel   = document.getElementById("seekCancel");
+  const seekInput    = document.getElementById("seekInput");
+  const seekMeta     = document.getElementById("seekMeta");
+  const seekResults  = document.getElementById("seekResults");
 
   // ---- State ----
   let activeCat = "all";
@@ -130,12 +140,17 @@
     lastIndex = idx;
     current = QUOTES[idx];
     drawCount++;
+    renderQuote(current);
+  }
 
+  // ---- Render a quote into the card (with the inked-fade transition) ----
+  function renderQuote(q) {
+    current = q;
     cardEl.classList.add("is-drawing");
     window.setTimeout(() => {
-      textEl.textContent = current.text;
-      attrEl.textContent = "— " + current.author;
-      tagEl.textContent = labelOf(current.cat).replace(/ · /g, " — ");
+      textEl.textContent = q.text;
+      attrEl.textContent = "— " + q.author;
+      tagEl.textContent = labelOf(q.cat).replace(/ · /g, " — ");
       cardEl.classList.remove("is-drawing");
       updateCounter();
     }, 260);
@@ -184,6 +199,11 @@
   copyBtn.addEventListener("click", inscribe);
 
   document.addEventListener("keydown", (e) => {
+    // When Seek is open, it owns the keyboard (let the input type freely).
+    if (seek && seek.classList.contains("open")) {
+      if (e.key === "Escape") closeSeek();
+      return;
+    }
     // When the scene viewer is open, it owns the keyboard.
     if (lightbox && lightbox.classList.contains("open")) {
       if (e.key === "Escape") closeGallery();
@@ -248,6 +268,111 @@
   if (lbNext) lbNext.addEventListener("click", nextScene);
   if (lbPrev) lbPrev.addEventListener("click", prevScene);
   if (lightbox) lightbox.addEventListener("click", (e) => { if (e.target === lightbox) closeGallery(); });
+
+  // ---- Seek (direct search through the codex) ----
+  const SEEK_CAP = 120;
+  let seekAcked = false; // remember the warning was acknowledged this session
+
+  const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+  function highlight(el, text, terms) {
+    el.textContent = "";
+    if (!terms.length) { el.textContent = text; return; }
+    const re = new RegExp("(" + terms.map(escapeRe).join("|") + ")", "ig");
+    let last = 0, m;
+    while ((m = re.exec(text)) !== null) {
+      if (m.index > last) el.appendChild(document.createTextNode(text.slice(last, m.index)));
+      const mk = document.createElement("mark");
+      mk.textContent = m[0];
+      el.appendChild(mk);
+      last = m.index + m[0].length;
+      if (m.index === re.lastIndex) re.lastIndex++; // guard against zero-length matches
+    }
+    if (last < text.length) el.appendChild(document.createTextNode(text.slice(last)));
+  }
+
+  function renderResults() {
+    const raw = seekInput.value.trim().toLowerCase();
+    const terms = raw ? raw.split(/\s+/) : [];
+    const matches = [];
+    for (let i = 0; i < QUOTES.length; i++) {
+      const q = QUOTES[i];
+      const hay = (q.text + " " + q.author).toLowerCase();
+      if (terms.every((t) => hay.indexOf(t) !== -1)) matches.push(i);
+    }
+
+    seekResults.innerHTML = "";
+    if (!matches.length) {
+      const e = document.createElement("div");
+      e.className = "seek-empty";
+      e.textContent = "No whisper in the codex answers to that.";
+      seekResults.appendChild(e);
+    }
+    matches.slice(0, SEEK_CAP).forEach((i) => {
+      const q = QUOTES[i];
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "seek-result";
+      btn.setAttribute("role", "option");
+      const t = document.createElement("p");
+      t.className = "seek-result-text";
+      highlight(t, "“" + q.text + "”", terms);
+      const meta = document.createElement("div");
+      meta.className = "seek-result-meta";
+      meta.appendChild(document.createTextNode("— " + q.author + " · "));
+      const cat = document.createElement("span");
+      cat.className = "seek-result-cat";
+      cat.textContent = labelOf(q.cat).replace(/ · /g, " — ");
+      meta.appendChild(cat);
+      btn.appendChild(t);
+      btn.appendChild(meta);
+      btn.addEventListener("click", () => chooseResult(i));
+      seekResults.appendChild(btn);
+    });
+
+    if (!terms.length) {
+      seekMeta.textContent = QUOTES.length + " whispers in the codex";
+    } else {
+      seekMeta.textContent = matches.length + (matches.length === 1 ? " whisper found" : " whispers found")
+        + (matches.length > SEEK_CAP ? " · showing first " + SEEK_CAP : "");
+    }
+  }
+
+  function chooseResult(i) {
+    sfx("copy");
+    lastIndex = i;
+    renderQuote(QUOTES[i]);
+    closeSeek();
+  }
+
+  function showSearch() {
+    seekWarn.hidden = true;
+    seekSearch.hidden = false;
+    renderResults();
+    window.setTimeout(() => seekInput.focus(), 60);
+  }
+
+  function openSeek() {
+    seek.classList.add("open");
+    seek.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+    sfx("swap");
+    if (seekAcked) { showSearch(); }
+    else { seekWarn.hidden = false; seekSearch.hidden = true; }
+  }
+
+  function closeSeek() {
+    seek.classList.remove("open");
+    seek.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+  }
+
+  if (seekBtn)     seekBtn.addEventListener("click", openSeek);
+  if (seekClose)   seekClose.addEventListener("click", closeSeek);
+  if (seekCancel)  seekCancel.addEventListener("click", closeSeek);
+  if (seekProceed) seekProceed.addEventListener("click", () => { seekAcked = true; sfx("tick"); showSearch(); });
+  if (seekInput)   seekInput.addEventListener("input", renderResults);
+  if (seek)        seek.addEventListener("click", (e) => { if (e.target === seek) closeSeek(); });
 
   // ---- Audio controls (Music / Sfx / volume) ----
   function syncAudioUI() {

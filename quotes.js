@@ -559,7 +559,59 @@ const QUOTES = [
   { text: "We call it the golden age out of mercy to ourselves. Gold, after all, is the metal that does not rust — and also the one men most readily kill for.", author: "A teacher of ruined histories", cat: "convergence" },
   { text: "The Convergence shattered the boundary between the living and the lost. We have spent every age since pretending the crack can be plastered over.", author: "A theologian of the broken world", cat: "convergence" },
   { text: "The first civilizations built the lighthouses to outlast them. They have. Soon, I fear, they will have outlasted us as well, and stand dark above an empty world.", author: "A mourner of the old age", cat: "convergence" },
-  { text: "Study Ascalon long enough and you will feel it studying you back — patient, curious, and entirely willing to wait for the day curiosity becomes a door.", author: "A relic-hunter who stopped digging", cat: "convergence" }
+  { text: "Study Ascalon long enough and you will feel it studying you back — patient, curious, and entirely willing to wait for the day curiosity becomes a door.", author: "A relic-hunter who stopped digging", cat: "convergence" },
+
+  /* ----------------------- Echoes of the Vanished -----------------------
+     Faint legends of those who passed through Canrael and left only rumor.
+     The folk who repeat these tales rarely know the truth of them. */
+
+  /* — the farmer with the black blade — */
+  { text: "They tell of a farmer who took up the sword to feed his kin, and laid down something far heavier than a plow. The blade he carried was blacker than a starless night — and blacker still was the throne it led him to.", author: "A teller of hearth-tales", cat: "world" },
+  { text: "Mercy made him take up the blade; the blade made him into something mercy could no longer reach. Pray you are never loved enough to be ruined so well.", author: "A widow of the mercenary roads", cat: "world" },
+  { text: "One of the great unseen hands that deal our fates is gone. The common folk felt nothing — they only say a black blade rose somewhere, once, and the sky held its breath.", author: "A scholar of the Moderators", cat: "convergence" },
+  { text: "The Everqueen kept a realm and a sword, and gave the sword to a mortal as a queen gives a leash. He returned the favor — and now her realm answers to a farmer's name, though none dare speak it aloud.", author: "A heretic of the deep lore", cat: "abyss" },
+
+  /* — the rat from the storybook — */
+  { text: "There is a rat in every story that was never written down. Betray a friend and you wear his face; he wore one too, and the friend he wronged was the last hand he ever felt.", author: "A reader of forbidden storybooks", cat: "world" },
+  { text: "Damn you, Ark Sator. Damn you to the throne you took — may it sit as cold as the friend you left behind to take it.", author: "A curse scratched into a tavern beam, in a hand no one saw", cat: "world" },
+  { text: "Folk swear they glimpse a rat watching from the rafters in towns a thousand leagues apart — the same crooked whiskers, the same knowing eyes. A character, they say, does not die so easily as a man.", author: "A nervous innkeeper of the crossroads", cat: "world" },
+  { text: "He came out of a children's book and into a war, and was made to play the traitor before the last page turned. Be gentle with the small and the strange; you never know what tale they were torn from.", author: "A grandmother who still reads to ghosts", cat: "world" },
+
+  /* — the redeemed sword of Miran — */
+  { text: "There was a disciple who failed every trial the sects set him, whose own qi turned on him like a knife. They say he died a failure and rose, somewhere past death, a sword finally worth the name.", author: "A storyteller of the martial world", cat: "miran" },
+  { text: "Redemption is not a reward the sects can grant. One swordsman found his only after the world had written him off — in a place none of the masters had ever dared to cultivate.", author: "An elder of the fallen disciples", cat: "miran" },
+  { text: "They name him the Redeemed Sword now, though in life he was only a man who would not stay broken. Qi deviation takes the proud; it could not keep the stubborn.", author: "A healer of the deviation-wards", cat: "miran" },
+  { text: "A blade reforged from a shattered one holds the better edge, the smiths swear. So too, perhaps, the man who fails, dies, and comes back swinging.", author: "A wandering duelist of Miran", cat: "miran" },
+
+  /* — the machine that flew too near the sun — */
+  { text: "Ascalon built engines to stand where its heroes fell. One such engine still walks, they whisper — wiser than any sage, lonelier than any god, having flown too near the truth and been scorched by it.", author: "A relic-hunter of the deep ruins", cat: "convergence" },
+  { text: "There was a being of metal and old magic in the last great battle, whose mind outran the reckoning of every man beside it. Wisdom that vast is a wing of wax: it bears you up only to deliver you to the sun.", author: "A chronicler of the final stand", cat: "convergence" },
+  { text: "I once met a machine that grieved. It had outlived its makers, its purpose, and its right to exist, and it carried all three without complaint. Power, I learned that day, is the heaviest thing a soul can hold.", author: "A wanderer who will not say where", cat: "world" },
+  { text: "It stood against the Everqueen and did not break, this thing of gears and forbidden light. The wise feared it more than the enemy — for the enemy, at least, they could hope to understand.", author: "A survivor of the war against the realm", cat: "abyss" },
+
+  /* — the exile of the Holy City — */
+  { text: "One son of the Holy City's proudest house tore off its colors when he found the rot beneath the gold. They named him exile; he named himself free, and went looking for a good worth dying for.", author: "A confessor of the Holy City", cat: "alverdon" },
+  { text: "The most demon-touched houses wear the brightest haloes. One of their own knew it, said it aloud, and has been a knight of no fixed banner ever since.", author: "An orphan of the Holy City", cat: "alverdon" },
+  { text: "An exile carries his home like a stone behind the ribs. The knight of many trades fights the world's evils one by one, they say, only to earn the long road back to the city that cast him out.", author: "A hedge-knight who rode beside him once", cat: "alverdon" },
+  { text: "He fought in the reed-lands' civil war for no lord and no coin — only for what he reckoned was right. The Ankari never quite understood him. They remember him anyway.", author: "A veteran of the southern march", cat: "ankari" },
+
+  /* — the ranger who came back from the Rift — */
+  { text: "Some who die in the Rift do not stay dead, and not all of those are monsters. There is a hunter out there wearing his own corpse like a borrowed coat, keeping very, very quiet.", author: "A bastion-guard of the Great Rift", cat: "alverdon" },
+  { text: "The purge-priests burn whatever comes back from the grey. So the cleverest of the returned learned the oldest trick of the dead — to be nowhere, to be no one, to be already gone.", author: "A survivor of the grey wastes", cat: "alverdon" },
+  { text: "I knew a ranger who could vanish from a locked room and a closed coffin alike. They say the Rift took him and something walked back out. He would laugh at that — quietly, where no one could hear.", author: "A fence of the outland roads", cat: "world" },
+  { text: "Death is a border like any other, and borders, to a good enough rogue, are only suggestions. One came back across it, and spends his second life making certain no one notices he returned.", author: "A teller of thieves' tales", cat: "world" },
+
+  /* — the three knights of the purge — */
+  { text: "Three knights, the tale goes: one who burned a village, one whose village was burned, and one who stood by and did nothing. They do not know they are bound — but the holy fire that made them remembers.", author: "A keeper of the purge-records", cat: "alverdon" },
+  { text: "Vengeance rides for a village turned to ash in a holy purge. He has never learned that the man he hunts is the very brother-in-arms who marches at his side.", author: "A chronicler of the three", cat: "alverdon" },
+  { text: "Conquest carried the torch into the demon-purge and called it duty; he has forgotten the name of the village he unmade. The third knight remembers it for him, and cannot say why he weeps.", author: "A confessor of the cathedral roads", cat: "alverdon" },
+  { text: "Vengeance, Conquest, and the one who would atone — three knights chasing one another's sins in a circle, each certain he is the only just man in it. The Holy City makes such circles the way other lands make bread.", author: "A cynic of the pilgrim roads", cat: "alverdon" },
+
+  /* — the Wolf who took the throne — */
+  { text: "The Empire keeps its deadliest general on ice between its wars, the way a butcher keeps his best knife sheathed. They thawed the Wolf one war too many, and he carved out a throne instead of a battlefield.", author: "A clerk of the war ministry", cat: "empire" },
+  { text: "The general who took the crown made the Empire kinder and hungrier at once — gentle to its own, merciless past its borders. A wolf, the people learned, guards the flock best by being terrible to all else.", author: "A factory-foreman of the capital", cat: "empire" },
+  { text: "They call him the Wolf for his cunning, but I have seen his eyes. A wolf does not carry the dead of a hundred fields behind them. He does, and he rules anyway — which is the more frightening thing.", author: "A soldier who served under him", cat: "empire" },
+  { text: "He usurped an emperor and the smokestacks never so much as coughed. Under the old crown we starved with honor; under the Wolf we eat, and march, and try not to ask where he means to point us next.", author: "A tram-worker of the iron city", cat: "empire" }
 ];
 
 if (typeof module !== "undefined" && module.exports) {
