@@ -207,7 +207,7 @@
       return arr;
     }
     const arr = ["assets/bg-" + cat + ".webp"];
-    for (let i = 1; i <= 4; i++) arr.push("assets/scenes/" + cat + "-" + i + ".webp");
+    for (let i = 1; i <= 9; i++) arr.push("assets/scenes/" + cat + "-" + i + ".webp");
     return arr;
   }
 
