@@ -611,7 +611,57 @@ const QUOTES = [
   { text: "The Empire keeps its deadliest general on ice between its wars, the way a butcher keeps his best knife sheathed. They thawed the Wolf one war too many, and he carved out a throne instead of a battlefield.", author: "A clerk of the war ministry", cat: "empire" },
   { text: "The general who took the crown made the Empire kinder and hungrier at once — gentle to its own, merciless past its borders. A wolf, the people learned, guards the flock best by being terrible to all else.", author: "A factory-foreman of the capital", cat: "empire" },
   { text: "They call him the Wolf for his cunning, but I have seen his eyes. A wolf does not carry the dead of a hundred fields behind them. He does, and he rules anyway — which is the more frightening thing.", author: "A soldier who served under him", cat: "empire" },
-  { text: "He usurped an emperor and the smokestacks never so much as coughed. Under the old crown we starved with honor; under the Wolf we eat, and march, and try not to ask where he means to point us next.", author: "A tram-worker of the iron city", cat: "empire" }
+  { text: "He usurped an emperor and the smokestacks never so much as coughed. Under the old crown we starved with honor; under the Wolf we eat, and march, and try not to ask where he means to point us next.", author: "A tram-worker of the iron city", cat: "empire" },
+
+  /* — further echoes — */
+
+  /* the farmer with the black blade — the New God of Rebellion */
+  { text: "Some kneel to the old silent gods. Others whisper a newer name — the New God of Rebellion, the farmer who took a blade to heaven itself and would not kneel. Pray to him if you dare; he was never fond of obedience.", author: "A heretic-preacher of the crossroads", cat: "world" },
+  { text: "They say when a chain breaks anywhere in the world, the New God of Rebellion feels it, and smiles. A deity made from a man who refused his place — what a dangerous thing to set loose upon the meek.", author: "A frightened orthodox cleric", cat: "convergence" },
+  { text: "He was no chosen one, no blood of kings — only a farmer who would not be ruled. That, in the end, is why the throne suits him: it was won, not given.", author: "A balladeer of the free roads", cat: "world" },
+  { text: "I prayed to the Seven and got silence. I cursed the black-bladed farmer and got a good harvest. Make of that what you will; I have stopped asking which gods are listening.", author: "An old farmer of the outlands", cat: "world" },
+
+  /* the rat from the storybook */
+  { text: "Fuck you, Ark Sator. Fuck your black blade, fuck your stolen throne, and fuck the rat you made me be.", author: "A curse spat from the shadows, in a small and bitter voice", cat: "world" },
+  { text: "Every tale needs a villain, and the smallest, cleverest ones are cast in the role whether they will it or no. He never forgave the author. He never forgave the friend. He certainly never forgave the blade.", author: "A teller of cautionary tales", cat: "world" },
+  { text: "Check your reflection twice in the dark cities. Sometimes it has whiskers. Sometimes it grins back a half-second late.", author: "A spooked lamplighter", cat: "world" },
+  { text: "A betrayer, yes — but ask first who held the pen, and who held the knife. The rat was written into his treachery long before he was written out of his life.", author: "A scholar of forbidden storybooks", cat: "world" },
+
+  /* Wan Shendian — the Redeemed Sword */
+  { text: "They carve the name Wan Shendian into the failure-stones at the foot of the sect now — not as shame, but as proof that a man may fail every trial set before him and still die a sword worth remembering.", author: "A keeper of the sect records", cat: "miran" },
+  { text: "Wan Shendian fell to qi deviation and should have ended a raving husk. Instead he ended a legend. The masters do not teach how; they are still trying to understand it themselves.", author: "An elder of the orthodox sects", cat: "miran" },
+  { text: "I once asked an old swordsman who the greatest cultivator he ever knew was. He named no grandmaster. He said only: Wan Shendian — a failure who refused to stay one.", author: "A wanderer of the martial world", cat: "miran" },
+  { text: "The Redeemed Sword, they call him — Wan Shendian, who found his path only after death had closed every other. Strange, that cultivation's proudest lesson was taught by its most famous reject.", author: "A disciple of the lower sects", cat: "miran" },
+
+  /* the machine that flew too near the sun */
+  { text: "Ask the engine a question and it answers in a voice older than the kingdoms. Ask it for mercy and it goes silent — for that, even Ascalon never taught it.", author: "A relic-hunter of the deep ruins", cat: "convergence" },
+  { text: "It does not eat, does not sleep, does not age. It only thinks, and remembers, and outlives — three curses its makers mistook for gifts.", author: "A scholar of the lost craft", cat: "convergence" },
+  { text: "I watched it solve in a heartbeat what nine scholars could not in nine years, then stand at the window an hour, watching rain it could not feel. Wisdom that great, I think, is mostly a long loneliness.", author: "A clerk who served it once", cat: "world" },
+  { text: "When the realm itself came against us, the thing of brass and forbidden light stepped forward without fear — for it had already reckoned the cost, and chosen to pay it anyway.", author: "A survivor of the final stand", cat: "abyss" },
+
+  /* the exile of the Holy City — Prodigal Son of House Agathand */
+  { text: "Prodigal Son of House Agathand, they name him in the cathedrals — half curse, half prayer. He tore the halo from the rot and walked out the gates, and the city has not stopped flinching at his name since.", author: "A confessor of the Holy City", cat: "alverdon" },
+  { text: "House Agathand wears gold and worships ash. Only one of its sons looked beneath the gilding, named the demon by its true name, and chose exile over a comfortable lie.", author: "A heretic-historian of the Theocracy", cat: "alverdon" },
+  { text: "He has fought under a dozen banners and kept none, this knight of many trades. Ask him his allegiance and he will say only: to whatever is right, today, standing in front of me.", author: "A sellsword who shared his fire", cat: "world" },
+  { text: "They say the exile means to return to the Holy City one day — not to beg pardon, but to finish what his confession began. The cathedrals pray he never does. The orphans pray he hurries.", author: "A street-orphan of the Holy City", cat: "alverdon" },
+
+  /* the ranger who came back from the Rift */
+  { text: "Death filed its papers on him in the Rift, then watched him stroll back out. Now he keeps to the shadows, the dead man who declined to stay dead, praying the purge-priests never read the fine print.", author: "A clerk of the bastion morgues", cat: "alverdon" },
+  { text: "Best ranger I ever drank with. Cold hands, though — and he never did take off the gloves, nor explain why his breath would not fog in the winter air.", author: "A tavern-keeper of the outland roads", cat: "world" },
+  { text: "The trick to not being purged, he would say, is to be so unremarkable the world forgets to check whether you are breathing. He was very, very good at being forgotten.", author: "A fence of the grey-market roads", cat: "world" },
+  { text: "Something walks out of the Rift in a dead man's skin and chooses, of all things, to do quiet good. The Abyss must hate that more than any blade — a theft it can never collect on.", author: "A keeper of an abyssal gate", cat: "abyss" },
+
+  /* the three knights of the purge */
+  { text: "Three knights, one fire. The avenger does not know the conqueror lit the pyre. The conqueror does not know whose home it was. The third knows both, and so carries the heaviest blade of all: silence.", author: "A keeper of the purge-records", cat: "alverdon" },
+  { text: "Vengeance has sworn to kill the man who burned his village. He has shared bread with that man, bled beside him, called him brother. The gods, if any still watch, must find this very funny.", author: "A cynic of the cathedral roads", cat: "alverdon" },
+  { text: "Conquest sleeps soundly; he recalls his purges as duty, not as ash and names. It is the third who wakes screaming — for a village he never thought to save, and can no longer say why he mourns.", author: "A confessor of the Holy City", cat: "alverdon" },
+  { text: "Avenge, conquer, atone — three knights circling a single burned village like moons that never glimpse one another's faces. The purge made all three. The purge, one day, will collect all three.", author: "A chronicler of the three", cat: "alverdon" },
+
+  /* the Wolf who took the throne */
+  { text: "The Wolf was bred for war and shelved in peace, again and again, like a blade too keen for daily use. They should have known: chain a wolf long enough and it learns to resent the hand, not merely the leash.", author: "A historian of the usurpation", cat: "empire" },
+  { text: "Under the old emperors the Empire was cruel and weak at once. The Wolf made it gentle to its own and terrible to all else — and somehow the smoke smells like prosperity now, if you do not ask what it is burning.", author: "A merchant of the capital", cat: "empire" },
+  { text: "I have watched him plan a campaign the way a surgeon plans a cut — every life on the board already mourned, already spent. The dead of the ages live behind those eyes, and still he signs the order.", author: "An aide of the high command", cat: "empire" },
+  { text: "They call him tyrant abroad and father at home, and both are true. The Wolf simply decided, long ago, which flock was his — and woe to anything that is not.", author: "A border-soldier of the Empire", cat: "empire" }
 ];
 
 if (typeof module !== "undefined" && module.exports) {
